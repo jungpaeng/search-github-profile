@@ -4,6 +4,9 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const saveBtn = document.getElementById("jsSave");
+let selectedColorBtn = document.getElementsByClassName(
+  "controls__color--select"
+)[0];
 
 const INITIAL_COLOR = "0d0d0d";
 const CANVAS_SIZE = 700;
@@ -53,12 +56,14 @@ const hangleCM = event => {
 };
 
 const handleColorClick = event => {
+  const { target } = event;
   const {
-    target: {
-      style: { background }
-    }
-  } = event;
+    style: { background }
+  } = target;
 
+  selectedColorBtn.classList.remove("controls__color--select");
+  target.classList.add("controls__color--select");
+  selectedColorBtn = target;
   ctx.strokeStyle = background;
   ctx.fillStyle = background;
 };
